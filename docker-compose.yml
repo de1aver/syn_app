@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  db:
+    build: ./psql
+    ports:
+      - "5432:5432"
+    volumes:
+      - psql-data:/var/lib/postgresql/data
+
+  app:
+      build: .
+      ports:
+        - "8000:8000"
+      depends_on:
+        - db
+      
+volumes:
+  psql-data: {}
